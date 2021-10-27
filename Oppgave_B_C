@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Oct 20 17:35:27 2021
+
+@author: abhiram
+"""
+
+class Spørsmal:
+    def __init__(self,spørsmal,alternativer,svar=0):
+        self.spørsmal = spørsmal
+        self.svar=svar
+        self.alternativer = alternativer
+    
+    def __str__(self):
+        resultat= self.spørsmal + "Svaralternativer: \n"
+        for index, verdi in enumerate(self.alternativer):
+            resultat+= f"{index}: {verdi}\n"
+        return resultat
+    
+    def sjekk_svar (self, korrekt_svar):
+        if korrekt_svar == self.svar:
+            return True
+        else: 
+            return False
+        
+#Spørsmål 1
+if __name__ == "__main__":
+    spm1 = Spørsmal("Hva er 5x5?", ["15", "25", "30"],1)
+    print (spm1)
+    bruker_svar = int(input("Skriv inn nummer for svar: \n"))
+    
+    if spm1.sjekk_svar(bruker_svar):
+        print("Riktig svar \n")
+    else:
+        print("Feil svar. ", "Det riktige svaret er alternativ 1 \n")
+        
+
+#Spørsmål 2
+    spm2 = Spørsmal("Hva er 4x5?", ["15", "25", "20"],2)
+    print (spm2)
+    bruker_svar = int(input("Skriv inn nummer for svar: \n"))
+    
+    if spm2.sjekk_svar(bruker_svar):
+        print("Riktig svar \n")
+    else:
+        print("Feil svar. ", "Det riktige svaret er alternativ 3 \n")
+        
+
+#Spørsmål 3
+    spm3 = Spørsmal("Hva er 6x5?", ["15", "25", "30"],2)
+    print (spm3)
+    bruker_svar = int(input("Skriv inn nummer for svar: \n"))
+    
+    if spm3.sjekk_svar(bruker_svar):
+        print("Riktig svar \n")
+    else:
+        print("Feil svar. ", "Det riktige svaret er alternativ 3 \n")

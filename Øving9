@@ -70,6 +70,6 @@ if __name__ == "__main__":
             print("Spiller 2: Korrekt")
         else:
             print("Spiller 2: Feil")
-    print(f"Spiller 1 hadde {poeng_spiller_1} riktige svar.")
-    print(f"Spiller 2 hadde {poeng_spiller_2} riktige svar.")
+    print(f"Spiller 1 hadde {poeng_spiller_1} riktige svar av 8 spørsmål.")
+    print(f"Spiller 2 hadde {poeng_spiller_2} riktige svar av 8 spørsmål.")
     

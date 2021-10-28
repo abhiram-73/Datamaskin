@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Oct 28 00:40:37 2021
+
+@author: abhiram
+"""
+
+
+
+class Sporsmaal:
+    def __init__(self, sporsmaal, alternativer, korrekt_svar=0):
+        self.sporsmaal = sporsmaal
+        self.alternativer = alternativer
+        self.korrekt_svar = korrekt_svar
+        
+    def __str__(self):
+        resultat = self.sporsmaal + "\nSvaralternativer:\n"
+        for index, verdi in enumerate(self.alternativer):
+            resultat += f"{index}: {verdi}\n"
+        resultat += "\n"
+        return resultat
+    
+    def sjekk_svar(self, svaret):
+        if svaret == self.korrekt_svar:
+            return True
+        else:
+            return False
+
+    def korrekt_svar_tekst(self):
+        return self.alternativer[self.korrekt_svar]
+
+
+def les_sporsmaal_fra_linje(linje):
+    komponenter = linje.split(":")
+    tallstreng = komponenter[1].strip()
+    tall = int(tallstreng)
+    alternativer = komponenter[2].strip("[]\n ")
+    alternativer = alternativer.split(",")
+    for i in range(len(alternativer)):
+        alternativer[i] = alternativer[i].strip()
+    sporsmaal = Sporsmaal(komponenter[0], alternativer, tall)
+    return sporsmaal
+
+
+def les_sporsmaal_fra_fil(filnavn):
+    sporsmaalene = list()
+    with open(filnavn, encoding="UTF-8") as fila:
+        for linje in fila:
+            sporsmaalene.append(les_sporsmaal_fra_linje(linje))
+    return sporsmaalene
+    
+
+if __name__ == "__main__":
+    sporsmaalene = les_sporsmaal_fra_fil("/Users/abhiram/Downloads/sporsmaalsfil.txt")
+    poeng_spiller_1 = 0
+    poeng_spiller_2 = 0
+    for sporsmaal in sporsmaalene:
+        print(sporsmaal)
+        valg_spiller_1 = int(input("Velg et svaralternativ for spiller 1: "))
+        valg_spiller_2 = int(input("Velg et svaralternativ for spiller 2: "))
+        print(sporsmaal.korrekt_svar_tekst())
+        if sporsmaal.sjekk_svar(valg_spiller_1):
+            poeng_spiller_1 += 1
+            print("Spiller 1: Korrekt")
+        else:
+            print("Spiller 1: Feil")
+        if sporsmaal.sjekk_svar(valg_spiller_2):
+            poeng_spiller_2 += 1
+            print("Spiller 2: Korrekt")
+        else:
+            print("Spiller 2: Feil")
+    print(f"Spiller 1 hadde {poeng_spiller_1} riktige svar.")
+    print(f"Spiller 2 hadde {poeng_spiller_2} riktige svar.")
+    
